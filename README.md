@@ -1,3 +1,3 @@
 # My Easy SQL
 
-MyEasySQL is a [Go](https://go.dev/) package intended to simplify sql querys in requests
+MyEasySQL a student projet of [Go](https://go.dev/) package intended to simplify [SQL](https://sql.sh/) querys and requests
