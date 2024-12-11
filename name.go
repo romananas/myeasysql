@@ -2,7 +2,14 @@ package myeasysql
 
 import "reflect"
 
-// read all name in the pointer of structure v and return it as a []string
+// _ReadNames takes a struct as input and returns a slice of strings containing
+// the names of the fields in the struct.
+//
+// Parameters:
+//   - v: an interface{} representing a pointer to a struct.
+//
+// Returns:
+//   - []string: a slice of strings containing the names of the fields in the struct.
 func _ReadNames(v any) []string {
 	var names []string
 	tv := reflect.TypeOf(v).Elem()

@@ -7,6 +7,16 @@ import (
 	"unsafe"
 )
 
+// _AssignPtrType takes a reflect.Value and returns a pointer to the underlying value
+// of the specified type. It supports int, bool, string, time.Time, and any types.
+// If the type is not recognized, it returns an error.
+//
+// Parameters:
+//   - field: reflect.Value representing the value to be converted to a pointer.
+//
+// Returns:
+//   - any: A pointer to the underlying value of the specified type.
+//   - error: An error if the type is not recognized.
 func _AssignPtrType(field reflect.Value) (any, error) {
 	switch field.Type().String() {
 	case "int":
@@ -24,6 +34,15 @@ func _AssignPtrType(field reflect.Value) (any, error) {
 	}
 }
 
+// _GetPointers takes an input of any type and returns a slice of pointers to the fields of the struct.
+// It returns an error if the input is not a pointer or if the input is not a struct.
+//
+// Parameters:
+//   - v: any type, expected to be a pointer to a struct.
+//
+// Returns:
+//   - []any: a slice containing pointers to the fields of the struct.
+//   - error: an error if the input is not a pointer or not a struct.
 func _GetPointers(v any) ([]any, error) {
 	var vPointers []any
 	var rv = reflect.ValueOf(v)

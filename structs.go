@@ -6,15 +6,14 @@ type DB struct {
 	db *sql.DB
 }
 
-// Convert *sql.DB type into myeasysql.DB type
+// Convert takes a pointer to an sql.DB object and returns a DB struct
+// initialized with the provided sql.DB object.
 //
-// Example Usage:
+// Parameters:
+//   - db: A pointer to an sql.DB object representing the database connection.
 //
-//	func main() {
-//		sql_db, _ := sql.Open("sqlite3", "data.do")
-//		myeasysql_db := myeasysql.Convert(sql_db)
-//		...
-//	}
+// Returns:
+//   - A DB struct with the db field set to the provided sql.DB object.
 func Convert(db *sql.DB) DB {
 	return DB{db: db}
 }
