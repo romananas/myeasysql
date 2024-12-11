@@ -14,3 +14,6 @@ Install myeasysql with golang
   go get github.com/romananas/myeasysql@latest
 ```
     
+## Licence
+
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
