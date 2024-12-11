@@ -12,7 +12,15 @@ func _ParseQuerys(query string) []string {
 	}
 	splited := strings.Split(step1[1], ",")
 	for i, s := range splited {
-		splited[i] = strings.TrimSpace(s)
+		if strings.Compare(s, "*") == 0 {
+			return []string{"*"}
+		}
+		step2 := regexp.MustCompile(".* AS (.*)$").FindStringSubmatch(s)
+		if len(step2) != 0 {
+			splited[i] = step2[1]
+		} else {
+			splited[i] = strings.TrimSpace(s)
+		}
 	}
 	return splited
 }
