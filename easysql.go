@@ -40,11 +40,13 @@ import (
 //	    fmt.Printf("User: %+v\n", user)
 //	}
 func (d DB) QueryRow(query string, dest any, args ...any) error {
+	// get row column as theres no columns method for *sql.Row
 	keys := _ParseQuerys(query)
 
 	ptrs, err := _GetPointers(dest)
 	tags := _ReadTags(dest)
 	names := _ReadNames(dest)
+
 	if err != nil {
 		return err
 	}
@@ -82,18 +84,16 @@ func (d DB) QueryRow(query string, dest any, args ...any) error {
 //	    fmt.Printf("Users: %+v\n", users)
 //	}
 func (d DB) Query(query string, dest any, args ...any) error {
-	// Vérifier que `dest` est un pointeur vers un slice
 	destVal := reflect.ValueOf(dest)
-	if destVal.Kind() != reflect.Ptr || destVal.Elem().Kind() != reflect.Slice {
+	if !_IsSlice(destVal) {
 		return fmt.Errorf("dest must be a pointer to a slice")
 	}
 
 	// Obtenir le type de l'élément du slice
-	elemType := destVal.Elem().Type().Elem()
-	if elemType.Kind() != reflect.Struct {
+	if !_IsStruct(destVal) {
 		return fmt.Errorf("slice elements must be structs")
 	}
-
+	elemType := destVal.Elem().Type().Elem()
 	// Exécuter la requête
 	rows, err := d.db.Query(query, args...)
 	if err != nil {
@@ -101,7 +101,7 @@ func (d DB) Query(query string, dest any, args ...any) error {
 	}
 	defer rows.Close()
 
-	// Lire les colonnes de la requête
+	// Read all columns name of the query
 	columns, err := rows.Columns()
 	if err != nil {
 		return err

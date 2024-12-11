@@ -19,3 +19,14 @@ func _IsPtr(rv reflect.Value) bool {
 func _IsStruct(rv reflect.Value) bool {
 	return rv.Elem().Kind() == reflect.Struct
 }
+
+func _IsSlice(rv reflect.Value) bool {
+	// Vérifier que `dest` est un pointeur vers un slice
+	return rv.Kind() == reflect.Ptr || rv.Elem().Kind() == reflect.Slice
+}
+
+// Obtenir le type de l'élément du slice
+// elemType := destVal.Elem().Type().Elem()
+// if elemType.Kind() != reflect.Struct {
+// 	return fmt.Errorf("slice elements must be structs")
+// }
