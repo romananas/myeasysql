@@ -1,11 +1,16 @@
 
 # My Easy Sql
 
-MyEasySQL a student projet of [Go](https://go.dev/) package intended to simplify [SQL](https://sql.sh/) querys and requests
+MyEasySQL is a student projet of [Go](https://go.dev/) package intended to simplify [SQL](https://sql.sh/) querys and executions
 
 
 
 
-## License
+## Installation
 
-[MIT](https://choosealicense.com/licenses/mit/)
+Install myeasysql with golang
+
+```bash
+  go get github.com/romananas/myeasysql@latest
+```
+    
