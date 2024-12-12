@@ -30,8 +30,8 @@ import (
 //	    fmt.Printf("Users: %+v\n", users)
 //	}
 func (d DB) Query(query string, dest any, args ...any) error {
-	destVal := reflect.ValueOf(dest)
 	// Vérifier que `dest` est un pointeur vers un slice
+	destVal := reflect.ValueOf(dest)
 	if destVal.Kind() != reflect.Ptr || destVal.Elem().Kind() != reflect.Slice {
 		return fmt.Errorf("dest must be a pointer to a slice")
 	}
