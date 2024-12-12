@@ -33,10 +33,10 @@ import (
 //	// Explanation: "username" maps to index 1, "password" to index 3, and "birth" to index 2.
 func _SortKeys(tags []string, names []string, keys []string) []int {
 	var order []int
-	// TODO: find a better way to sort
+	// TODO: optimize the sorting algorithm for better performance or clarity
 	for _, key := range keys {
 		for i, name := range names {
-			var cmpTag = len(tags) != 0 && strings.Compare(tags[i], key) == 0
+			var cmpTag = len(tags) != 0 && i < len(tags) && tags[i] == key
 			var cmpName = strings.Compare(strings.ToLower(name), strings.ToLower(key)) == 0
 
 			if cmpTag || cmpName {
