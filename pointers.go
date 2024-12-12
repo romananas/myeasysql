@@ -46,10 +46,10 @@ func assignPtrType(field reflect.Value) (any, error) {
 func getPointers(v any) ([]any, error) {
 	var vPointers []any
 	var rv = reflect.ValueOf(v)
-	if !_IsPtr(rv) {
+	if !isPtr(rv) {
 		return nil, fmt.Errorf("v is not a pointer")
 	}
-	if !_IsStruct(rv) {
+	if !isStruct(rv) {
 		return nil, fmt.Errorf("v is not a struct")
 	}
 	rv = reflect.ValueOf(v).Elem()

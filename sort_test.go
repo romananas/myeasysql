@@ -46,7 +46,7 @@ func Test_SortKeys(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run("", func(t *testing.T) {
-			if got := _SortKeys(tt.tags, tt.names, tt.keys); !reflect.DeepEqual(got, tt.want) {
+			if got := sortKeys(tt.tags, tt.names, tt.keys); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("_SortKeys() = %v, want %v", got, tt.want)
 			}
 		})

@@ -45,7 +45,7 @@ func (d DB) QueryRow(query string, dest any, args ...any) error {
 	if err != nil {
 		return err
 	}
-	order := _SortKeys(tags, names, keys)
+	order := sortKeys(tags, names, keys)
 	var sorted []any
 	for _, i := range order {
 		sorted = append(sorted, ptrs[i])

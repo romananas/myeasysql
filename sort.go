@@ -31,7 +31,7 @@ import (
 //	result := _SortKeys(tags, names, keys)
 //	// Result: [1, 3, 2]
 //	// Explanation: "username" maps to index 1, "password" to index 3, and "birth" to index 2.
-func _SortKeys(tags []string, names []string, keys []string) []int {
+func sortKeys(tags []string, names []string, keys []string) []int {
 	var order []int
 	nameIndex := make(map[string]int)
 	tagIndex := make(map[string]int)

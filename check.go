@@ -4,7 +4,7 @@ import "reflect"
 
 // _IsPtr checks if the given reflect.Value is a pointer.
 // It returns true if the value is of kind reflect.Pointer, otherwise false.
-func _IsPtr(rv reflect.Value) bool {
+func isPtr(rv reflect.Value) bool {
 	return rv.Kind() == reflect.Pointer
 }
 
@@ -16,11 +16,11 @@ func _IsPtr(rv reflect.Value) bool {
 //
 // Returns:
 // - bool: true if the underlying value is a struct, false otherwise.
-func _IsStruct(rv reflect.Value) bool {
+func isStruct(rv reflect.Value) bool {
 	return rv.Elem().Kind() == reflect.Struct
 }
 
-func _IsSlice(rv reflect.Value) bool {
+func isSlice(rv reflect.Value) bool {
 	// Vérifier que `dest` est un pointeur vers un slice
 	return rv.Kind() == reflect.Ptr || rv.Elem().Kind() == reflect.Slice
 }

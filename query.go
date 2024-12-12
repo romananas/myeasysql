@@ -31,12 +31,12 @@ import (
 //	}
 func (d DB) Query(query string, dest any, args ...any) error {
 	destVal := reflect.ValueOf(dest)
-	if !_IsSlice(destVal) {
+	if !isSlice(destVal) {
 		return fmt.Errorf("dest must be a pointer to a slice")
 	}
 
 	// Obtenir le type de l'élément du slice
-	if !_IsStruct(destVal) {
+	if !isStruct(destVal) {
 		return fmt.Errorf("slice elements must be structs")
 	}
 	elemType := destVal.Elem().Type().Elem()
@@ -69,7 +69,7 @@ func (d DB) Query(query string, dest any, args ...any) error {
 		// Réorganiser les pointeurs selon l'ordre des colonnes
 		tags := readTags(elem.Addr().Interface())
 		names := readNames(elem.Addr().Interface())
-		order := _SortKeys(tags, names, columns)
+		order := sortKeys(tags, names, columns)
 		var sorted []any
 		for _, i := range order {
 			sorted = append(sorted, ptrs[i])
