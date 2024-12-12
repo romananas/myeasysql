@@ -31,15 +31,16 @@ import (
 //	}
 func (d DB) Query(query string, dest any, args ...any) error {
 	destVal := reflect.ValueOf(dest)
-	if !isSlice(destVal) {
+	// Vérifier que `dest` est un pointeur vers un slice
+	if destVal.Kind() != reflect.Ptr || destVal.Elem().Kind() != reflect.Slice {
 		return fmt.Errorf("dest must be a pointer to a slice")
 	}
 
 	// Obtenir le type de l'élément du slice
-	if !isStruct(destVal) {
+	elemType := destVal.Elem().Type().Elem()
+	if elemType.Kind() != reflect.Struct {
 		return fmt.Errorf("slice elements must be structs")
 	}
-	elemType := destVal.Elem().Type().Elem()
 	// Exécuter la requête
 	rows, err := d.db.Query(query, args...)
 	if err != nil {
