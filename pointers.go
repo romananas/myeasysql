@@ -17,7 +17,7 @@ import (
 // Returns:
 //   - any: A pointer to the underlying value of the specified type.
 //   - error: An error if the type is not recognized.
-func _AssignPtrType(field reflect.Value) (any, error) {
+func assignPtrType(field reflect.Value) (any, error) {
 	switch field.Type().String() {
 	case "int":
 		return (*int)(unsafe.Pointer(field.UnsafeAddr())), nil
@@ -43,7 +43,7 @@ func _AssignPtrType(field reflect.Value) (any, error) {
 // Returns:
 //   - []any: a slice containing pointers to the fields of the struct.
 //   - error: an error if the input is not a pointer or not a struct.
-func _GetPointers(v any) ([]any, error) {
+func getPointers(v any) ([]any, error) {
 	var vPointers []any
 	var rv = reflect.ValueOf(v)
 	if !_IsPtr(rv) {
@@ -54,7 +54,7 @@ func _GetPointers(v any) ([]any, error) {
 	}
 	rv = reflect.ValueOf(v).Elem()
 	for i := range rv.NumField() {
-		ptr, err := _AssignPtrType(rv.Field(i))
+		ptr, err := assignPtrType(rv.Field(i))
 		if err != nil {
 			return nil, err
 		}

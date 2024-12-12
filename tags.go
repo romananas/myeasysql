@@ -11,7 +11,7 @@ import "reflect"
 //
 // Returns:
 //   - []string: a slice containing the values of the "sql" tags from the struct fields.
-func _ReadTags(v any) []string {
+func readTags(v any) []string {
 	var tags []string
 	tv := reflect.TypeOf(v).Elem()
 	for i := range tv.NumField() {

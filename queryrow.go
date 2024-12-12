@@ -36,11 +36,11 @@ package myeasysql
 //	}
 func (d DB) QueryRow(query string, dest any, args ...any) error {
 	// get row column as theres no columns method for *sql.Row
-	keys := _ParseQuerys(query)
+	keys := parseQueries(query)
 
-	ptrs, err := _GetPointers(dest)
-	tags := _ReadTags(dest)
-	names := _ReadNames(dest)
+	ptrs, err := getPointers(dest)
+	tags := readTags(dest)
+	names := readNames(dest)
 
 	if err != nil {
 		return err

@@ -61,14 +61,14 @@ func (d DB) Query(query string, dest any, args ...any) error {
 		elem := reflect.New(elemType).Elem()
 
 		// Obtenir les pointeurs vers les champs correspondants
-		ptrs, err := _GetPointers(elem.Addr().Interface())
+		ptrs, err := getPointers(elem.Addr().Interface())
 		if err != nil {
 			return err
 		}
 
 		// Réorganiser les pointeurs selon l'ordre des colonnes
-		tags := _ReadTags(elem.Addr().Interface())
-		names := _ReadNames(elem.Addr().Interface())
+		tags := readTags(elem.Addr().Interface())
+		names := readNames(elem.Addr().Interface())
 		order := _SortKeys(tags, names, columns)
 		var sorted []any
 		for _, i := range order {

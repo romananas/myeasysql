@@ -14,22 +14,22 @@ import (
 //
 // Returns:
 //   - []string: A slice of strings containing the column names, or nil if the query is invalid or does not match the expected pattern.
-func _ParseQuerys(query string) []string {
+func parseQueries(query string) []string {
 	step1 := regexp.MustCompile(`SELECT\s+(.*?)\s+FROM`).FindStringSubmatch(query)
 	if len(step1) == 0 {
 		return nil
 	}
-	splited := strings.Split(step1[1], ",")
-	for i, s := range splited {
-		if strings.Compare(s, "*") == 0 {
+	splitted := strings.Split(step1[1], ",")
+	for i, s := range splitted {
+		if s == "*" {
 			return []string{"*"}
 		}
 		step2 := regexp.MustCompile(".* AS (.*)$").FindStringSubmatch(s)
 		if len(step2) != 0 {
-			splited[i] = step2[1]
+			splitted[i] = step2[1]
 		} else {
-			splited[i] = strings.TrimSpace(s)
+			splitted[i] = strings.TrimSpace(s)
 		}
 	}
-	return splited
+	return splitted
 }

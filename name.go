@@ -10,7 +10,7 @@ import "reflect"
 //
 // Returns:
 //   - []string: a slice of strings containing the names of the fields in the struct.
-func _ReadNames(v any) []string {
+func readNames(v any) []string {
 	var names []string
 	tv := reflect.TypeOf(v).Elem()
 	for i := range tv.NumField() {
