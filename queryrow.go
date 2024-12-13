@@ -21,8 +21,8 @@ package myeasysql
 // Example Usage:
 //
 //	type User struct {
-//	    ID       int    `db:"id"`
-//	    Username string `db:"username"`
+//	    ID       int    `sql:"id"`
+//	    Username string `sql:"username"`
 //	}
 //
 //	func main() {
