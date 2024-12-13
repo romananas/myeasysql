@@ -41,8 +41,12 @@ func (d DB) Query(query string, dest any, args ...any) error {
 	if elemType.Kind() != reflect.Struct {
 		return fmt.Errorf("slice elements must be structs")
 	}
+	stmt, err := d.db.Prepare(query)
+	if err != nil {
+		return err
+	}
 	// Exécuter la requête
-	rows, err := d.db.Query(query, args...)
+	rows, err := stmt.Query(args...)
 	if err != nil {
 		return err
 	}
